@@ -2,6 +2,7 @@ package com.penn.springactivemq.controller;
 
 import com.penn.springactivemq.mq.ActivemqProducer;
 import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,8 @@ import javax.annotation.Resource;
 @Controller
 public class MqController {
 
+    final Logger logger = Logger.getLogger(MqController.class);
+
     @Autowired
     private ActivemqProducer activemqProducer;
 
@@ -18,8 +21,16 @@ public class MqController {
     private ActiveMQQueue destination;
 
     @RequestMapping("/send")
-    public String index() {
-        activemqProducer.sendMessage( "hello ,this is the first activemq message!");
+    public String send() {
+        activemqProducer.sendMessage( "----->hello ,this is a queue activemq message!");
+        logger.info("发送queue消息：----->hello ,this is a queue activemq message!");
+        return "index";
+    }
+
+    @RequestMapping("/sendTopic")
+    public String sendTopic() {
+        activemqProducer.sendTopicMessage( "====>hello ,this is a topic activemq message!");
+        logger.info("发送topic消息：----->hello ,this is a topic activemq message!");
         return "index";
     }
 
