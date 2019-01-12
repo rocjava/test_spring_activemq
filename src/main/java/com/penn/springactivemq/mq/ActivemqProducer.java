@@ -1,5 +1,6 @@
 package com.penn.springactivemq.mq;
 
+import com.penn.spring.activemq.comm.po.PersonVo;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,14 @@ public class ActivemqProducer {
         queueJmsTemplate.send(new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
                 return session.createTextMessage(message);
+            }
+        });
+    }
+
+    public void sendObjectMessage(final PersonVo message) {
+        queueJmsTemplate.send(new MessageCreator() {
+            public Message createMessage(Session session) throws JMSException {
+                return session.createObjectMessage( message);
             }
         });
     }
