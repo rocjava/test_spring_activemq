@@ -26,7 +26,7 @@
     <bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
         <!-- 设置消息队列的名字 -->
         <constructor-arg>
-            <value>Jaycekon</value>
+            <value>jacy</value>
         </constructor-arg>
     </bean>
 

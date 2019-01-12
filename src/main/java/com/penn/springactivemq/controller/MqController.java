@@ -31,9 +31,13 @@ public class MqController {
     @RequestMapping("/sendObj")
     public String sendObj() {
         PersonVo po = new PersonVo();
-        po.setPersonId(10000001l);
+
         po.setPersonName("administrator");
-        activemqProducer.sendObjectMessage(po);
+        for(long i=0;i<=9l;i++){
+            po.setPersonId(i);
+            activemqProducer.sendObjectMessage(po);
+        }
+
         logger.info("发送queue消息：----->hello ,this is a obj activemq message!");
         return "index";
     }
